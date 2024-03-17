@@ -1,7 +1,7 @@
 package leetcode
 
 func ContainsNearbyDuplicate(nums []int, k int) bool {
-	if len(nums) < 0 {
+	if len(nums) == 0 {
 		return false
 	}
 	resultMap := make(map[int]struct{})
