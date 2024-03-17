@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	lc "github.com/dev-crusader404/leetcode-solutions/leetcode"
+)
 
 func main() {
-	fmt.Println(containsNearbyDuplicate([]int{1, 2, 3, 1, 2, 3}, 2))
+	fmt.Println(lc.ContainsNearbyDuplicate([]int{1, 2, 3, 1, 2, 3}, 2))
 }

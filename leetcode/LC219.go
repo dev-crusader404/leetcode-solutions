@@ -1,6 +1,6 @@
 package main
 
-func containsNearbyDuplicate(nums []int, k int) bool {
+func ContainsNearbyDuplicate(nums []int, k int) bool {
 	if len(nums) < 0 {
 		return false
 	}
@@ -9,7 +9,7 @@ func containsNearbyDuplicate(nums []int, k int) bool {
 	low := 0
 	for i, v := range nums {
 		if (i - low) > k {
-			delete(resultMap, low)
+			delete(resultMap, nums[low])
 			low++
 		}
 		if _, ok := resultMap[v]; ok {
