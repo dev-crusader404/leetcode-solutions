@@ -11,3 +11,5 @@ __debug_bin
 .DS_store
 # Dependency directories
 vendor/
+
+resources/app-test.properties
