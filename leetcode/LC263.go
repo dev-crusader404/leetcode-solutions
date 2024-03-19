@@ -33,14 +33,6 @@ func IsUgly2(n int) bool {
 			resultChan <- n
 		}(n, v)
 	}
-
-	go func() {
-		defer close(resultChan)
-	}()
-
-	num := 1
-	for v := range resultChan {
-		num *= v
-	}
+	num := <-resultChan * <-resultChan * <-resultChan
 	return num == n*n
 }
