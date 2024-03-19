@@ -15,3 +15,32 @@ func IsUgly(n int) bool {
 		return false
 	}
 }
+
+func IsUgly2(n int) bool {
+	if n <= 0 {
+		return false
+	}
+	if n == 1 {
+		return true
+	}
+
+	resultChan := make(chan int, 3)
+	pf := []int{2, 3, 5}
+	for _, v := range pf {
+		go func(n, factor int) {
+			for ; n%factor == 0; n /= factor {
+			}
+			resultChan <- n
+		}(n, v)
+	}
+
+	go func() {
+		defer close(resultChan)
+	}()
+
+	num := 1
+	for v := range resultChan {
+		num *= v
+	}
+	return num == n*n
+}

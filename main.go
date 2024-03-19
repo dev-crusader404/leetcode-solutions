@@ -11,4 +11,5 @@ func main() {
 
 	fmt.Println(lc.AddDigits(54613475))
 	fmt.Println(lc.AddDigits2(54613475))
+	fmt.Println(lc.IsUgly2(30))
 }
