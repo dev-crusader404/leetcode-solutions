@@ -23,11 +23,54 @@ func (h *HashMap) Insert(key string) {
 	h.ArrayMap[index].Insert(key)
 }
 
+func (h *HashMap) Delete(key string) {
+	index := generateHash(key)
+	h.ArrayMap[index].Delete(key)
+}
+
+func (h *HashMap) Search(key string) bool {
+	searchIndex := generateHash(key)
+	return h.ArrayMap[searchIndex].Search(key)
+}
+
 // Insert function insert the key into Linkedlist
 func (l *LinkListed) Insert(key string) {
-	currentNode := &ListNode{data: key}
-	currentNode.next = l.head
-	l.head = currentNode
+	if !l.Search(key) {
+		currentNode := &ListNode{data: key}
+		currentNode.next = l.head
+		l.head = currentNode
+	} else {
+		fmt.Printf("Insert Key: %s already exists\n", key)
+	}
+}
+
+func (l *LinkListed) Delete(key string) {
+	currentNode := l.head
+
+	if currentNode.data == key {
+		l.head = currentNode.next
+		return
+	}
+
+	for currentNode.next != nil {
+		if currentNode.next.data == key {
+			currentNode.next = currentNode.next.next
+			return
+		}
+		currentNode = currentNode.next
+	}
+	fmt.Printf("Delete Key: %s does not exists\n", key)
+}
+
+func (l *LinkListed) Search(key string) bool {
+	currentNode := l.head
+	for currentNode != nil {
+		if currentNode.data == key {
+			return true
+		}
+		currentNode = currentNode.next
+	}
+	return false
 }
 
 func initMap() *HashMap {
@@ -49,9 +92,16 @@ func generateHash(key string) int {
 func InitHashMap() {
 	m := initMap()
 	fmt.Println(m)
-
-	l := &LinkListed{}
-	l.Insert("Jack")
-	l.Insert("Pete")
-	l.Insert("Ryan")
+	m.Insert("Jack")
+	m.Insert("Pete")
+	m.Insert("Ryan")
+	m.Insert("Kyle")
+	m.Insert("Stuart")
+	m.Insert("John")
+	m.Insert("Jim")
+	m.Insert("Bard")
+	m.Insert("Kate")
+	fmt.Println(m.Search("Jack"))
+	m.Delete("Kate")
+	m.Insert("Jill")
 }
