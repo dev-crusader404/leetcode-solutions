@@ -16,5 +16,6 @@ func main() {
 	fmt.Println(lc.IsUgly2(30))
 	// srt.SortWithMerge()
 	// ds.BST()
-	ds.InitHashMap()
+	// ds.InitHashMap()
+	ds.CallHeap()
 }
