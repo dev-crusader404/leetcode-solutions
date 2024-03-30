@@ -65,6 +65,24 @@ func (h *Heap) maxHeapify(i int) {
 	}
 }
 
+// HeapSort function uses maxheap to sort elements
+func (h *Heap) HeapSort() []int {
+	if h.size == 0 {
+		fmt.Println("Heap is empty")
+		return []int{}
+	}
+
+	result := make([]int, h.size)
+
+	for i := h.size - 1; i >= 0; i-- {
+		result[i] = h.List[0]
+		h.List[i], h.List[0] = h.List[0], h.List[i]
+		h.size--
+		h.maxHeapify(0)
+	}
+	return result
+}
+
 func CallHeap() {
 	t := initializeHeap(10)
 	fmt.Println(t)
@@ -74,4 +92,7 @@ func CallHeap() {
 	fmt.Println(t.List)
 	t.BuildHeap()
 	fmt.Println(t.List)
+	result := t.HeapSort()
+	fmt.Println(result)
+
 }
