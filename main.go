@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
-
-	ds "github.com/dev-crusader404/leetcode-solutions/datastructure"
-	// srt "github.com/dev-crusader404/leetcode-solutions/datastructure/sorting"
-	lc "github.com/dev-crusader404/leetcode-solutions/leetcode"
+	// ds "github.com/dev-crusader404/leetcode-solutions/datastructure"
+	srt "github.com/dev-crusader404/leetcode-solutions/datastructure/sorting"
+	// lc "github.com/dev-crusader404/leetcode-solutions/leetcode"
 )
 
 func main() {
@@ -13,9 +11,10 @@ func main() {
 
 	// fmt.Println(lc.AddDigits(54613475))
 	// fmt.Println(lc.AddDigits2(54613475))
-	fmt.Println(lc.IsUgly2(30))
+	// fmt.Println(lc.IsUgly2(30))
 	// srt.SortWithMerge()
-	ds.BST()
+	// ds.BST()
 	// ds.InitHashMap()
 	// ds.CallHeap()
+	srt.QuickSortApproach()
 }
