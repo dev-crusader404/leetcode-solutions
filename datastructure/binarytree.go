@@ -1,6 +1,9 @@
 package datastructure
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type Tree struct {
 	Root *TreeNode
@@ -125,4 +128,41 @@ func BST() {
 	t.PreOrderTransversal()
 	fmt.Println("\nPostOrder Transversal: ")
 	t.PostOrderTransversal()
+
+	myTree := &Tree{}
+	for _, v := range []int{4, 2, 3, 0, 5} {
+		myTree.Insert(v)
+	}
+	res := myTree.binaryTreePaths()
+	fmt.Println(res)
+}
+
+func (t *Tree) binaryTreePaths() []string {
+	if t.Root == nil {
+		return []string{}
+	}
+	return t.Root.binaryTreePaths()
+}
+
+func (n *TreeNode) binaryTreePaths() []string {
+	result, arr := []string{}, []string{}
+	transversePath(n, &arr, &result)
+	return result
+}
+
+func transversePath(root *TreeNode, arr, result *[]string) {
+	*arr = append(*arr, fmt.Sprintf("%d", root.Data))
+	if root.LeftChild == nil && root.RightChild == nil {
+		*result = append(*result, strings.Join(*arr, "->"))
+		(*arr) = (*arr)[:len(*arr)-1]
+		return
+	}
+	if root.LeftChild != nil {
+		transversePath(root.LeftChild, arr, result)
+	}
+
+	if root.RightChild != nil {
+		transversePath(root.RightChild, arr, result)
+	}
+	(*arr) = (*arr)[:len(*arr)-1]
 }

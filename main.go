@@ -15,7 +15,7 @@ func main() {
 	// fmt.Println(lc.AddDigits2(54613475))
 	fmt.Println(lc.IsUgly2(30))
 	// srt.SortWithMerge()
-	// ds.BST()
+	ds.BST()
 	// ds.InitHashMap()
-	ds.CallHeap()
+	// ds.CallHeap()
 }
