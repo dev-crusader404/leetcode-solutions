@@ -50,6 +50,6 @@ func getIndex(num, pos, radix int) int {
 
 func sortStable(arr []int, position float64, radix int) {
 	sort.SliceStable(arr, func(i, j int) bool {
-		return ((arr[i] / int(math.Pow(10.0, position))) % 10) < ((arr[j] / int(math.Pow(10.0, position))) % 10)
+		return ((arr[i] / int(math.Pow(10.0, position))) % radix) < ((arr[j] / int(math.Pow(10.0, position))) % radix)
 	})
 }
