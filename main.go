@@ -3,6 +3,7 @@ package main
 import (
 	// srt "github.com/dev-crusader404/leetcode-solutions/datastructure/sorting"
 	// lc "github.com/dev-crusader404/leetcode-solutions/leetcode"
+	ds "github.com/dev-crusader404/leetcode-solutions/datastructure"
 	tp "github.com/dev-crusader404/leetcode-solutions/datastructure/test-proj"
 )
 
@@ -19,4 +20,5 @@ func main() {
 	// srt.QuickSortApproach()
 	// srt.Radix()
 	tp.DuplicateRemove()
+	ds.RunQueue()
 }
