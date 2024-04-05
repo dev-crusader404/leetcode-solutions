@@ -1,26 +1,14 @@
-package datastructure
+package binarytree
 
 import (
 	"fmt"
 	"strings"
 )
 
-type Tree struct {
-	Root *TreeNode
-}
-
 type TreeNode struct {
 	Data       int
 	LeftChild  *TreeNode
 	RightChild *TreeNode
-}
-
-func (t *Tree) Insert(key int) {
-	if t.Root == nil {
-		t.Root = &TreeNode{Data: key}
-	} else {
-		t.Root.Insert(key)
-	}
 }
 
 func (t *TreeNode) Insert(key int) {
@@ -39,11 +27,60 @@ func (t *TreeNode) Insert(key int) {
 	}
 }
 
-func (t *Tree) Search(key int) bool {
-	if t.Root == nil {
-		return false
+func (n *TreeNode) InOrderTransversal() {
+	if n.LeftChild != nil {
+		n.LeftChild.InOrderTransversal()
 	}
-	return t.Root.Search(key)
+	fmt.Printf("%d ", n.Data)
+
+	if n.RightChild != nil {
+		n.RightChild.InOrderTransversal()
+	}
+}
+
+func (n *TreeNode) PreOrderTransversal() {
+	fmt.Printf("%d ", n.Data)
+
+	if n.LeftChild != nil {
+		n.LeftChild.PreOrderTransversal()
+	}
+
+	if n.RightChild != nil {
+		n.RightChild.PreOrderTransversal()
+	}
+}
+
+func (n *TreeNode) PostOrderTransversal() {
+	if n.LeftChild != nil {
+		n.LeftChild.PostOrderTransversal()
+	}
+
+	if n.RightChild != nil {
+		n.RightChild.PostOrderTransversal()
+	}
+	fmt.Printf("%d ", n.Data)
+}
+
+func (t *TreeNode) Delete(key int) *TreeNode {
+	if t == nil {
+		return nil
+	}
+
+	if t.Data > key {
+		t.LeftChild = t.LeftChild.Delete(key)
+	} else if t.Data < key {
+		t.RightChild = t.RightChild.Delete(key)
+	} else {
+		if t.RightChild == nil {
+			return t.LeftChild
+		} else if t.LeftChild == nil {
+			return t.RightChild
+		} else {
+			t.Data = t.RightChild.Min()
+			t.RightChild = t.RightChild.Delete(t.Data)
+		}
+	}
+	return t
 }
 
 func (t *TreeNode) Search(key int) bool {
@@ -57,91 +94,20 @@ func (t *TreeNode) Search(key int) bool {
 	}
 }
 
-func (t *Tree) InOrderTransversal() {
-	if t.Root != nil {
-		t.Root.InOrderTransversal()
-	}
-}
-
-func (n *TreeNode) InOrderTransversal() {
+func (n *TreeNode) Min() int {
 	if n.LeftChild != nil {
-		n.LeftChild.InOrderTransversal()
+		return n.LeftChild.Min()
 	}
-	fmt.Println(n.Data)
 
+	return n.Data
+}
+
+func (n *TreeNode) Max() int {
 	if n.RightChild != nil {
-		n.RightChild.InOrderTransversal()
-	}
-}
-
-func (t *Tree) PreOrderTransversal() {
-	if t.Root != nil {
-		t.Root.PreOrderTransversal()
-	}
-}
-
-func (n *TreeNode) PreOrderTransversal() {
-	fmt.Println(n.Data)
-
-	if n.LeftChild != nil {
-		n.LeftChild.PreOrderTransversal()
+		return n.RightChild.Max()
 	}
 
-	if n.RightChild != nil {
-		n.RightChild.PreOrderTransversal()
-	}
-}
-
-func (t *Tree) PostOrderTransversal() {
-	if t.Root != nil {
-		t.Root.PostOrderTransversal()
-	}
-}
-
-func (n *TreeNode) PostOrderTransversal() {
-	if n.LeftChild != nil {
-		n.LeftChild.PostOrderTransversal()
-	}
-
-	if n.RightChild != nil {
-		n.RightChild.PostOrderTransversal()
-	}
-	fmt.Println(n.Data)
-}
-
-func BST() {
-	t := &Tree{}
-	t.Insert(35)
-	t.Insert(165)
-	t.Insert(47)
-	t.Insert(243)
-	t.Insert(65)
-	t.Insert(146)
-	t.Insert(10)
-	t.Insert(6)
-	t.Insert(15)
-
-	fmt.Println(t.Search(10))
-	fmt.Println("\nInOrder Transversal: ")
-	t.InOrderTransversal()
-	fmt.Println("\nPreOrder Transversal: ")
-	t.PreOrderTransversal()
-	fmt.Println("\nPostOrder Transversal: ")
-	t.PostOrderTransversal()
-
-	myTree := &Tree{}
-	for _, v := range []int{4, 2, 3, 0, 5} {
-		myTree.Insert(v)
-	}
-	res := myTree.binaryTreePaths()
-	fmt.Println(res)
-}
-
-func (t *Tree) binaryTreePaths() []string {
-	if t.Root == nil {
-		return []string{}
-	}
-	return t.Root.binaryTreePaths()
+	return n.Data
 }
 
 func (n *TreeNode) binaryTreePaths() []string {
