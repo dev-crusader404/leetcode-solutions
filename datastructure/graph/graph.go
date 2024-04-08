@@ -1,6 +1,9 @@
 package graph
 
-import "fmt"
+import (
+	"container/heap"
+	"fmt"
+)
 
 type Graph struct {
 	vertices   []*Vertex
@@ -123,4 +126,32 @@ func InitGraph() {
 	fmt.Printf("\n\nAfter removing edge from Petaluma to SR Transit Mall")
 	gr.PrintGraph(true)
 
+	fmt.Println("***********		***********		***********")
+	fmt.Println("Graph2:")
+	gr2 := NewGraph(true, true)
+	A1 := gr2.AddVertex("A")
+	B1 := gr2.AddVertex("B")
+	C1 := gr2.AddVertex("C")
+	D1 := gr2.AddVertex("D")
+	E1 := gr2.AddVertex("E")
+	gr2.AddEdges(A1, B1, Weight(4))
+	gr2.AddEdges(A1, C1, Weight(2))
+	gr2.AddEdges(B1, C1, Weight(1))
+	gr2.AddEdges(B1, D1, Weight(2))
+	gr2.AddEdges(B1, E1, Weight(3))
+	gr2.AddEdges(C1, E1, Weight(1))
+	gr2.AddEdges(E1, D1, Weight(5))
+	gr2.PrintGraph(true)
+
+	pq := make(PriorityQueue, len(gr2.vertices))
+	for i, v := range gr2.vertices {
+		pq[i] = NewGraphQueue(v, i)
+	}
+
+	heap.Init(&pq)
+
+	for pq.Len() > 0 {
+		item := heap.Pop(&pq).(*GraphPriorityQueue)
+		fmt.Printf("%.2d:%+v\n", item.priority, *item.vertex)
+	}
 }
