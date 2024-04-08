@@ -1,6 +1,7 @@
 package graph
 
 import (
+	"container/heap"
 	"math"
 )
 
@@ -11,7 +12,8 @@ func GetShortestPath(startVertex, endVertex *Vertex, g *Graph) (string, int) {
 	distance := make(map[string]int)
 	prevsVertex := make(map[string]*Vertex)
 	priorityQ := make(PriorityQueue, 0)
-	priorityQ.Push(NewGraphQueue(startVertex, 0))
+	heap.Init(&priorityQ)
+	heap.Push(&priorityQ, NewGraphQueue(startVertex, 0))
 	distance[startVertex.data] = 0
 	prevsVertex[startVertex.data] = NewVertex("Nil")
 	visitedMap := make(map[string]struct{})
@@ -23,7 +25,7 @@ func GetShortestPath(startVertex, endVertex *Vertex, g *Graph) (string, int) {
 	}
 
 	for !priorityQ.isEmpty() {
-		currentVertex := priorityQ.Pop().(*GraphPriorityQueue).vertex
+		currentVertex := heap.Pop(&priorityQ).(*GraphPriorityQueue).vertex
 
 		if _, ok := visitedMap[currentVertex.data]; ok {
 			continue
@@ -37,7 +39,7 @@ func GetShortestPath(startVertex, endVertex *Vertex, g *Graph) (string, int) {
 			if newDistanceFromCurrentVertex < distance[adjacentVertex] {
 				distance[adjacentVertex] = newDistanceFromCurrentVertex
 				prevsVertex[adjacentVertex] = currentVertex
-				priorityQ.Push(NewGraphQueue(edges.toVertex, distance[adjacentVertex]))
+				heap.Push(&priorityQ, NewGraphQueue(edges.toVertex, distance[adjacentVertex]))
 			}
 		}
 	}

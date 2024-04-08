@@ -133,8 +133,8 @@ func InitGraph() {
 	C1 := gr2.AddVertex("C")
 	D1 := gr2.AddVertex("D")
 	E1 := gr2.AddVertex("E")
-	gr2.AddEdges(A1, B1, Weight(9))
-	gr2.AddEdges(A1, C1, Weight(2))
+	gr2.AddEdges(A1, B1, Weight(4))
+	gr2.AddEdges(A1, C1, Weight(11))
 	gr2.AddEdges(B1, C1, Weight(1))
 	gr2.AddEdges(B1, D1, Weight(2))
 	gr2.AddEdges(B1, E1, Weight(3))
@@ -143,7 +143,7 @@ func InitGraph() {
 	gr2.AddEdges(D1, B1, Weight(3))
 	gr2.PrintGraph(true)
 
-	path, distance := GetShortestPath(A1, B1, gr2)
+	path, distance := GetShortestPath(A1, E1, gr2)
 
-	fmt.Printf("Shortest distance from %s to %s: %d \nFollowed Path: %s", A1.data, B1.data, distance, path)
+	fmt.Printf("Shortest distance from %s to %s: %d \nFollowed Path: %s", A1.data, E1.data, distance, path)
 }
