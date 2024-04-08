@@ -5,7 +5,6 @@ package graph
 type GraphPriorityQueue struct {
 	vertex   *Vertex
 	priority int
-	index    int
 }
 
 type PriorityQueue []*GraphPriorityQueue
@@ -15,7 +14,7 @@ func (pq PriorityQueue) Len() int {
 }
 
 func (pq PriorityQueue) Less(i, j int) bool {
-	return pq[i].priority > pq[j].priority
+	return pq[i].priority < pq[j].priority
 }
 
 func (pq PriorityQueue) Swap(i, j int) {
@@ -23,9 +22,7 @@ func (pq PriorityQueue) Swap(i, j int) {
 }
 
 func (pq *PriorityQueue) Push(x any) {
-	n := len(*pq)
 	data := x.(*GraphPriorityQueue)
-	data.index = n
 	*pq = append(*pq, data)
 }
 
@@ -34,9 +31,12 @@ func (pq *PriorityQueue) Pop() any {
 	n := len(old)
 	popped := old[n-1]
 	old[n-1] = nil
-	popped.index = -1
 	*pq = old[:n-1]
 	return popped
+}
+
+func (pq *PriorityQueue) isEmpty() bool {
+	return len(*pq) == 0
 }
 
 func NewGraphQueue(v *Vertex, p int) *GraphPriorityQueue {

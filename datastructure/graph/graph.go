@@ -1,7 +1,6 @@
 package graph
 
 import (
-	"container/heap"
 	"fmt"
 )
 
@@ -134,24 +133,17 @@ func InitGraph() {
 	C1 := gr2.AddVertex("C")
 	D1 := gr2.AddVertex("D")
 	E1 := gr2.AddVertex("E")
-	gr2.AddEdges(A1, B1, Weight(4))
+	gr2.AddEdges(A1, B1, Weight(9))
 	gr2.AddEdges(A1, C1, Weight(2))
 	gr2.AddEdges(B1, C1, Weight(1))
 	gr2.AddEdges(B1, D1, Weight(2))
 	gr2.AddEdges(B1, E1, Weight(3))
 	gr2.AddEdges(C1, E1, Weight(1))
-	gr2.AddEdges(E1, D1, Weight(5))
+	gr2.AddEdges(E1, D1, Weight(2))
+	gr2.AddEdges(D1, B1, Weight(3))
 	gr2.PrintGraph(true)
 
-	pq := make(PriorityQueue, len(gr2.vertices))
-	for i, v := range gr2.vertices {
-		pq[i] = NewGraphQueue(v, i)
-	}
+	path, distance := GetShortestPath(A1, B1, gr2)
 
-	heap.Init(&pq)
-
-	for pq.Len() > 0 {
-		item := heap.Pop(&pq).(*GraphPriorityQueue)
-		fmt.Printf("%.2d:%+v\n", item.priority, *item.vertex)
-	}
+	fmt.Printf("Shortest distance from %s to %s: %d \nFollowed Path: %s", A1.data, B1.data, distance, path)
 }
