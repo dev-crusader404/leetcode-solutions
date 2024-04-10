@@ -41,7 +41,7 @@ func NewItem(val, count int) *Item {
 	}
 }
 
-func topKFrequent(nums []int, k int) []int {
+func TopKFrequent(nums []int, k int) []int {
 	if len(nums) <= 0 {
 		return []int{}
 	}

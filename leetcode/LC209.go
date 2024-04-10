@@ -2,7 +2,7 @@ package leetcode
 
 import "math"
 
-func minSubArrayLen(target int, nums []int) int {
+func MinSubArrayLen(target int, nums []int) int {
 	if len(nums) == 0 {
 		return 0
 	}
