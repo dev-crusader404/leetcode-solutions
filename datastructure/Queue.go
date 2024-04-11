@@ -1,3 +1,12 @@
+/* This is an implementation of doubly linkedlist which holds integer in its node.
+Queue has a pointer to both head and tail, and its size.
+Each node has a 'value' that stores the integer, and pointer to its next and previous node.
+ This queue implmentation adds elements to the front of the list
+ and removes element from the back of the queue with the regular methods
+ i.e. Push() and Pop()
+ AddToEnd and RemoveFromFront method is also added as a part of doubly linkedlist
+*/
+
 package datastructure
 
 import "fmt"
@@ -12,7 +21,7 @@ type Node struct {
 	value      int
 }
 
-func (a *Queue) Push(v int) {
+func (a *Queue) Push2(v int) {
 	if a.tail == nil {
 		a.tail = &Node{
 			value: v,
@@ -35,25 +44,72 @@ func (a *Queue) Push(v int) {
 	a.size++
 }
 
+//Push method add element to the front of Queue
+func (a *Queue) Push(v int) {
+	node := &Node{value: v}
+	if a.head == nil {
+		a.tail = node
+	} else {
+		node.next = a.head
+		a.head.prev = node
+	}
+	a.head = node
+	a.size++
+}
+
 func (a *Queue) isEmpty() bool {
 	return a.size == 0
 }
 
+// Pop method removes elements from back of the queue.
 func (a *Queue) Pop() (int, bool) {
 	if a.isEmpty() {
 		return -1, false
-	} else if a.head == a.tail {
-		p := a.head.value
-		a.head = nil
-		a.tail = nil
-		a.size--
-		return p, true
 	}
-	popped := a.tail.value
+
+	if a.tail.prev == nil {
+		a.head = nil
+	} else {
+		a.tail.prev.next = nil
+	}
+
+	popped := a.tail
 	a.tail = a.tail.prev
-	a.tail.next = nil
 	a.size--
-	return popped, true
+	popped.prev = nil
+	return popped.value, true
+}
+
+func (a *Queue) AddToEnd(v int) {
+	node := &Node{value: v}
+
+	if a.head == nil {
+		a.head = node
+	} else {
+		node.prev = a.tail
+		a.tail.next = node
+	}
+
+	a.tail = node
+	a.size++
+}
+
+func (a *Queue) RemoveFromFront() (int, bool) {
+	if a.isEmpty() {
+		return -1, false
+	}
+
+	if a.head.next == nil {
+		a.tail = nil
+	} else {
+		a.head.next.prev = nil
+	}
+
+	popped := a.head
+	a.head = a.head.next
+	a.size--
+	popped.next = nil
+	return popped.value, true
 }
 
 func (a *Queue) GetAll() []int {
@@ -65,7 +121,7 @@ func (a *Queue) GetAll() []int {
 	return result
 }
 
-func runQueue() {
+func RunQueue() {
 	o := Queue{}
 	o.Push(5)
 	o.Push(-45)
@@ -73,6 +129,8 @@ func runQueue() {
 	o.Push(57)
 	o.Push(86)
 	o.Push(-12)
+	o.AddToEnd(75)
+	o.AddToEnd(93)
 	fmt.Println(o.GetAll())
 	fmt.Println("Size: ", o.size)
 	fmt.Println(o.Pop())
@@ -84,5 +142,7 @@ func runQueue() {
 	fmt.Println("Size: ", o.size)
 	fmt.Println(o.Pop())
 	fmt.Println(o.Pop())
+	fmt.Println(o.RemoveFromFront())
+	fmt.Println(o.RemoveFromFront())
 	fmt.Println(o.Pop())
 }

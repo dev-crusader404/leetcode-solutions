@@ -9,7 +9,7 @@ func SortWithMerge() {
 	fmt.Printf("After:\t%v\n", inputArr)
 }
 func mergeSort(arr []int, start, end int) {
-	if end == start {
+	if end <= start {
 		return
 	}
 
