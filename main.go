@@ -2,11 +2,11 @@ package main
 
 import (
 	// srt "github.com/dev-crusader404/leetcode-solutions/datastructure/sorting"
-	// lc "github.com/dev-crusader404/leetcode-solutions/leetcode"
+	lc "github.com/dev-crusader404/leetcode-solutions/leetcode"
 	// ds "github.com/dev-crusader404/leetcode-solutions/datastructure"
 	// bst "github.com/dev-crusader404/leetcode-solutions/datastructure/binarytree"
 	// tp "github.com/dev-crusader404/leetcode-solutions/datastructure/test-proj"
-	gh "github.com/dev-crusader404/leetcode-solutions/datastructure/graph"
+	// gh "github.com/dev-crusader404/leetcode-solutions/datastructure/graph"
 )
 
 func main() {
@@ -24,5 +24,6 @@ func main() {
 	// tp.DuplicateRemove()
 	// ds.CallHeap()
 	// bst.BST()
-	gh.InitGraph()
+	// gh.InitGraph()
+	lc.Run()
 }
