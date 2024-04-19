@@ -1,7 +1,5 @@
 package leetcode
 
-import "fmt"
-
 /*
 
 Given two strings s1 and s2, return true if s2 contains a permutation of s1, or false otherwise.
@@ -69,8 +67,4 @@ func checkPermutation(c1, c2 map[rune]int) bool {
 		}
 	}
 	return true
-}
-
-func Run() {
-	fmt.Println(checkInclusion("ab", "eidbaooo"))
 }
