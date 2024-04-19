@@ -1,7 +1,5 @@
 package leetcode
 
-import "fmt"
-
 func maximumSubarraySum(nums []int, k int) int64 {
 	uniqueMap := make(map[int]int)
 	var left int
@@ -33,9 +31,4 @@ func getMaxSum(m map[int]int, sum int64) int64 {
 	} else {
 		return rslt
 	}
-}
-
-func Run() {
-	arr := []int{1, 5, 4, 2, 9, 9, 9}
-	fmt.Println(maximumSubarraySum(arr, 3))
 }
