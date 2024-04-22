@@ -14,7 +14,6 @@ type Nodes[T comparable] struct {
 func (a *List[T]) Push(v T) {
 	if a.head == nil {
 		a.head = &Nodes[T]{data: v}
-		// a.tail = a.head
 	} else {
 		currentNode := a.head
 		for currentNode.next != nil {
