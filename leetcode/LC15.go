@@ -46,7 +46,7 @@ func threeSum(nums []int) [][]int {
 		return result
 	}
 	sort.Ints(nums)
-	if nums[0] >= 0 {
+	if nums[0] > 0 {
 		return result
 	}
 
@@ -81,7 +81,7 @@ func threeSum(nums []int) [][]int {
 }
 
 func Run15() {
-	l := []int{-1, 0, 1, 2, -1, -4}
+	l := []int{-1, 0, 0, 1, 2, -1, 0, -4}
 	r := threeSum(l)
 	fmt.Println(r)
 }
