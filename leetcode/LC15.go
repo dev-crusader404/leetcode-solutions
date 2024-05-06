@@ -1,5 +1,10 @@
 package leetcode
 
+import (
+	"fmt"
+	"sort"
+)
+
 /*
 Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 
@@ -34,3 +39,49 @@ Constraints:
 3 <= nums.length <= 3000
 -105 <= nums[i] <= 105
 */
+
+func threeSum(nums []int) [][]int {
+	var result [][]int
+	if len(nums) < 3 {
+		return result
+	}
+	sort.Ints(nums)
+	if nums[0] >= 0 {
+		return result
+	}
+
+	for i := 0; i < len(nums)-2; i++ {
+		left, right, target := i+1, len(nums)-1, -nums[i]
+		if nums[i] > 0 {
+			break
+		}
+
+		if i == 0 || (i > 0 && nums[i] != nums[i-1]) {
+			for left < right {
+				if nums[left]+nums[right] < target {
+					left++
+				} else if nums[left]+nums[right] > target {
+					right--
+				} else {
+					result = append(result, []int{nums[i], nums[left], nums[right]})
+					for left < right && nums[left] == nums[left+1] {
+						left++
+					}
+					for left < right && nums[right] == nums[right-1] {
+						right--
+					}
+					left++
+					right--
+				}
+			}
+		}
+
+	}
+	return result
+}
+
+func Run15() {
+	l := []int{-1, 0, 1, 2, -1, -4}
+	r := threeSum(l)
+	fmt.Println(r)
+}

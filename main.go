@@ -3,13 +3,13 @@ package main
 import (
 	// srt "github.com/dev-crusader404/leetcode-solutions/datastructure/sorting"
 
-	// lc "github.com/dev-crusader404/leetcode-solutions/leetcode"
+	lc "github.com/dev-crusader404/leetcode-solutions/leetcode"
 	// ds "github.com/dev-crusader404/leetcode-solutions/datastructure"
 	// bst "github.com/dev-crusader404/leetcode-solutions/datastructure/binarytree"
 	// tp "github.com/dev-crusader404/leetcode-solutions/datastructure/test-proj"
 	// gh "github.com/dev-crusader404/leetcode-solutions/datastructure/graph"
-	gen "github.com/dev-crusader404/leetcode-solutions/datastructure/generics"
-	it "github.com/dev-crusader404/leetcode-solutions/datastructure/iterator"
+	// gen "github.com/dev-crusader404/leetcode-solutions/datastructure/generics"
+	// it "github.com/dev-crusader404/leetcode-solutions/datastructure/iterator"
 )
 
 func main() {
@@ -30,6 +30,7 @@ func main() {
 	// gh.InitGraph()
 	// lc.Run()
 	// gen.RunLinkedList()
-	gen.GenerateList()
-	it.RunIterator()
+	// gen.GenerateList()
+	// it.RunIterator()
+	lc.Run15()
 }
