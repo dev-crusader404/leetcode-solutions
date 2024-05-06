@@ -33,4 +33,5 @@ func main() {
 	// gen.GenerateList()
 	// it.RunIterator()
 	lc.Run15()
+	lc.RunRotatedSearch()
 }
