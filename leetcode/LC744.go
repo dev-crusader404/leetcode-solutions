@@ -20,7 +20,7 @@ func nextGreatestLetter(letters []byte, target byte) byte {
 // Time complexity - O(logN)
 func nextGreater2(letters []byte, target byte) byte {
 	last := letters[len(letters)-1]
-	if target == 'z' || last < target {
+	if target == 'z' || last <= target {
 		return letters[0]
 	}
 
