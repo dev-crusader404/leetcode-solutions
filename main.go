@@ -33,5 +33,6 @@ func main() {
 	// gen.GenerateList()
 	// it.RunIterator()
 	lc.Run15()
-	lc.RunRotatedSearch()
+	lc.RunLC2487()
+	lc.FindMinInRotatedArray()
 }
