@@ -65,3 +65,8 @@ func SearchII(nums []int, target int) bool {
 	}
 	return false
 }
+
+func RunSearch() {
+	a := []int{1, 2, 4, 4, 4, 5, 6, 6, 7, 0}
+	SearchII(a, 0)
+}
