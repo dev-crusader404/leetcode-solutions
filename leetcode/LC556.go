@@ -30,6 +30,9 @@ func nextGreaterElement3(n int) int {
 	}
 	res := string(arr)
 	o, _ := strconv.Atoi(res)
+	if o > math.MaxInt32 {
+		return -1
+	}
 	return o
 }
 
@@ -46,5 +49,5 @@ func getMinIndex(arr []byte, val byte) int {
 }
 
 func RunLC556() {
-	fmt.Println(nextGreaterElement3(230241))
+	fmt.Println(nextGreaterElement3(2147483486))
 }
