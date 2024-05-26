@@ -8,6 +8,25 @@ package leetcode
  * }
  */
 
+func mergeInBetween2(list1 *ListNode, a int, b int, list2 *ListNode) *ListNode {
+	var start *ListNode
+	end := list1
+
+	for i := 0; i < b; end = end.Next {
+		i++
+		if i == a {
+			start = end
+		}
+	}
+	start.Next = list2
+
+	for list2.Next != nil {
+		list2 = list2.Next
+	}
+	list2.Next = end.Next
+	return list1
+}
+
 func mergeInBetween(list1 *ListNode, a int, b int, list2 *ListNode) *ListNode {
 	toJoin := list2
 	toInsert := list1
@@ -57,4 +76,5 @@ func RunLC1669() {
 	}
 
 	mergeInBetween(l1.head, 3, 4, l2.head)
+	mergeInBetween2(l1.head, 3, 4, l2.head)
 }
