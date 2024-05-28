@@ -8,7 +8,7 @@ package leetcode
  * }
  */
 func reorderList(head *ListNode) {
-	if head == nil {
+	if head == nil || head.Next == nil {
 		return
 	}
 
@@ -18,7 +18,8 @@ func reorderList(head *ListNode) {
 		fast = fast.Next.Next
 	}
 
-	prev, current := slow, slow.Next
+	var prev *ListNode
+	current := slow
 
 	// reversed the half part
 	for current != nil {
@@ -28,12 +29,28 @@ func reorderList(head *ListNode) {
 		current = runner
 	}
 
-	for head != slow {
+	for head.Next != slow {
 		temp := head.Next
 		head.Next = prev
 		head = head.Next
 		prev = prev.Next
 		head.Next = temp
+		head = head.Next
 	}
 
+	for prev != nil {
+		head.Next = prev
+		prev = prev.Next
+		head = head.Next
+	}
+}
+
+func RunLC143() {
+	l1 := Node{}
+	l1.Add(1)
+	l1.Add(2)
+	l1.Add(3)
+	l1.Add(4)
+	l1.Add(5)
+	reorderList(l1.head)
 }
