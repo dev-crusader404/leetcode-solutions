@@ -7,7 +7,32 @@ package leetcode
  *     Next *ListNode
  * }
  */
+
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
+	if head == nil || (head.Next == nil && n == 1) {
+		return nil
+	}
+
+	i, fast, slow := 0, head, head
+	for i < n {
+		fast = fast.Next
+		i++
+	}
+
+	if fast == nil {
+		return head.Next
+	}
+
+	for fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next
+	}
+
+	slow.Next = slow.Next.Next
+	return head
+}
+
+func removeNthFromEnd2(head *ListNode, n int) *ListNode {
 	if head == nil || (head.Next == nil && n == 1) {
 		return nil
 	}
