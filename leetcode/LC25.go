@@ -9,7 +9,30 @@ import "fmt"
  *     Next *ListNode
  * }
  */
+
 func reverseKGroup(head *ListNode, k int) *ListNode {
+	current, count := head, 0
+	for count < k {
+		if current == nil {
+			return head
+		}
+		current = current.Next
+		count++
+	}
+
+	prev := reverseKGroup(current, k)
+
+	for count > 0 {
+		run := head.Next
+		head.Next = prev
+		prev = head
+		head = run
+		count--
+	}
+	return prev
+}
+
+func reverseKGroup2(head *ListNode, k int) *ListNode {
 	if head == nil || k == 1 {
 		return head
 	}
@@ -72,6 +95,8 @@ func RunLC25() {
 	l.Add(4)
 	l.Add(5)
 	l.head.PrintLinkedList()
-	rev := reverseKGroup(l.head, 3)
+	rev := reverseKGroup(l.head, 2)
+	rev.PrintLinkedList()
+	rev = reverseKGroup2(l.head, 2)
 	rev.PrintLinkedList()
 }
