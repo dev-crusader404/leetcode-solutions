@@ -1,19 +1,21 @@
 package leetcode
 
-/*   Below is the interface for Iterator, which is already defined for you.
+//   Below is the interface for Iterator, which is already defined for you.
 
-   type Iterator struct {
+type Iterator struct {
+	data []int
+}
 
-   }
+func (this *Iterator) hasNext() bool {
+	return len(this.data) != 0
+}
 
-   func (this *Iterator) hasNext() bool {
-		// Returns true if the iteration has more elements.
-   }
-
-   func (this *Iterator) next() int {
-		// Returns the next element in the iteration.
-   }
-*/
+func (this *Iterator) next() int {
+	n := len(this.data)
+	pop := this.data[n-1]
+	this.data = this.data[:n-1]
+	return pop
+}
 
 type PeekingIterator struct {
 	itr *Iterator
