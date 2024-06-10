@@ -1,6 +1,6 @@
 package leetcode
 
-//   Definition for a Node.
+//   Definition for a Node1.
 type Node1 struct {
 	Val   int
 	Left  *Node1
@@ -9,26 +9,26 @@ type Node1 struct {
 }
 
 func connect(root *Node1) *Node1 {
-	if root != nil {
+	if root == nil {
 		return root
 	}
-	list := []*Node1{root}
+	queue := []*Node1{root}
 
-	for len(list) > 0 {
-		n := len(list)
+	for len(queue) > 0 {
+		n := len(queue)
 		for i := 0; i < n; i++ {
-			current := list[i]
-			if i != n-1 {
-				current.Next = list[i+1]
+			current := queue[i]
+			if i < n-1 {
+				current.Next = queue[i+1]
 			}
 			if current.Left != nil {
-				list = append(list, current.Left)
+				queue = append(queue, current.Left)
 			}
 			if current.Right != nil {
-				list = append(list, current.Right)
+				queue = append(queue, current.Right)
 			}
 		}
-		list = list[n:]
+		queue = queue[n:]
 	}
 	return root
 }
