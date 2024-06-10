@@ -132,3 +132,39 @@ func transversePath(root *TreeNode, arr, result *[]string) {
 	}
 	(*arr) = (*arr)[:len(*arr)-1]
 }
+
+func BuildTree(arr []any) *TreeNode {
+	if len(arr) == 0 || arr[0] == nil {
+		return &TreeNode{}
+	}
+	root := &TreeNode{Data: arr[0].(int)}
+	queue := []*TreeNode{root}
+	i := 0
+	for i < (len(arr)-1)/2 {
+		if arr[i] == nil {
+			continue
+		}
+		node := queue[0]
+		queue = queue[1:]
+		left := 2*i + 1
+		right := 2*i + 2
+		setChild(node.LeftChild, arr[left])
+		if node.LeftChild != nil {
+			queue = append(queue, node.LeftChild)
+		}
+		setChild(node.RightChild, arr[right])
+		if node.RightChild != nil {
+			queue = append(queue, node.RightChild)
+		}
+		i++
+	}
+
+	return root
+}
+
+func setChild(node *TreeNode, val any) {
+	if val == nil {
+		return
+	}
+	node = &TreeNode{Data: val.(int)}
+}
