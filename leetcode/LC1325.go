@@ -13,18 +13,24 @@ func BuildTree(arr []any) *TreeNode {
 	root := &TreeNode{Val: arr[0].(int)}
 	queue := []*TreeNode{root}
 	i := 0
-	for i < (len(arr)-1)/2 {
+	// len or len-1
+	for i <= len(arr)/2 {
 		node := queue[0]
 		queue = queue[1:]
 		left := 2*i + 1
 		right := 2*i + 2
-		node.Left = setChild(node.Left, arr[left])
-		if node.Left != nil {
-			queue = append(queue, node.Left)
+		if left < len(arr) {
+			node.Left = setChild(node.Left, arr[left])
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
 		}
-		node.Right = setChild(node.Right, arr[right])
-		if node.Right != nil {
-			queue = append(queue, node.Right)
+
+		if right < len(arr) {
+			node.Right = setChild(node.Right, arr[right])
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+			}
 		}
 		i++
 	}
