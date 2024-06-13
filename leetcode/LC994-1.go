@@ -16,6 +16,32 @@ func WallAndGates(grid [][]int) [][]int {
 	if len(grid) == 0 {
 		return grid
 	}
+	for i, v := range grid {
+		for j, w := range v {
+			if w == 0 {
+				findMinEscape(grid, i, j, 0)
+			}
+		}
+	}
+	return grid
+}
+
+func findMinEscape(grid [][]int, row, col, step int) {
+	if row < 0 || row >= len(grid) || col < 0 || col >= len((grid)[0]) || step > grid[row][col] {
+		return
+	}
+	grid[row][col] = step
+	for i := 0; i < len(dir); i++ {
+		r := row + dir[i][0]
+		c := col + dir[i][1]
+		findMinEscape(grid, r, c, step+1)
+	}
+}
+
+func WallAndGates2(grid [][]int) [][]int {
+	if len(grid) == 0 {
+		return grid
+	}
 	start := findGates(grid)
 	minPathToGates(start, &grid)
 	return grid
@@ -61,5 +87,8 @@ func findGates(g [][]int) [][]int {
 
 func RunWallGate() {
 	a := [][]int{{Inf, -1, 0, Inf}, {Inf, Inf, Inf, -1}, {Inf, -1, Inf, -1}, {0, -1, Inf, Inf}}
-	fmt.Println(WallAndGates(a))
+	b := [][]int{{Inf, -1, 0, Inf}, {Inf, Inf, Inf, -1}, {Inf, -1, Inf, -1}, {0, -1, Inf, Inf}}
+
+	fmt.Println(WallAndGates(b))
+	fmt.Println(WallAndGates2(a))
 }
