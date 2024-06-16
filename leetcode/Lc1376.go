@@ -8,7 +8,18 @@ func numOfMinutes(n int, headID int, manager []int, informTime []int) int {
 	}
 	adList := buildAdjList(manager)
 	fmt.Println(adList)
-	return 0
+	return findInformTime(headID, 0, adList, informTime)
+}
+
+func findInformTime(start, maxTime int, list [][]int, infoTime []int) int {
+	if len(list[start]) == 0 {
+		return maxTime
+	}
+	total := maxTime + infoTime[start]
+	for _, v := range list[start] {
+		maxTime = max(maxTime, findInformTime(v, total, list, infoTime))
+	}
+	return maxTime
 }
 
 func buildAdjList(m []int) [][]int {
