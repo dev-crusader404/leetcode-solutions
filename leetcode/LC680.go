@@ -11,9 +11,7 @@ func validPalindrome(s string) bool {
 			left++
 			right--
 		} else {
-			rmLeft := s[:left] + s[left+1:]
-			rmRight := s[:right] + s[right+1:]
-			return checkPalindrome(rmLeft, 0, len(rmLeft)-1) || checkPalindrome(rmRight, 0, len(rmRight)-1)
+			return checkPalindrome(s, left+1, right) || checkPalindrome(s, left, right-1)
 		}
 	}
 	return true
