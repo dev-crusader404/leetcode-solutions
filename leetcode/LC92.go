@@ -12,35 +12,27 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 		return head
 	}
 	curr, count := head, 1
-	var prev *ListNode
+	var prev, dumm *ListNode
 	for count < left && curr != nil {
 		prev = curr
 		curr = curr.Next
 		count++
 	}
-	stop, c := curr, count
-	for count <= right {
-		stop = stop.Next
+	end := curr
+	for count <= right && curr != nil {
+		runner := curr.Next
+		curr.Next = dumm
+		dumm = curr
+		curr = runner
 		count++
 	}
-	reversed := reversal(curr, stop, c, right)
+	end.Next = curr
 	if prev != nil {
-		prev.Next = reversed
+		prev.Next = dumm
 	} else {
-		return reversed
+		return dumm
 	}
 	return head
-}
-
-func reversal(node, prev *ListNode, count, right int) *ListNode {
-	for count <= right && node != nil {
-		runner := node.Next
-		node.Next = prev
-		prev = node
-		node = runner
-		count++
-	}
-	return prev
 }
 
 func RunLC92() {
