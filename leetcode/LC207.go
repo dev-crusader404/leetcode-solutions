@@ -6,36 +6,32 @@ func canFinish(numCourses int, prerequisites [][]int) bool {
 	}
 
 	list := buildAdjacency(prerequisites, numCourses)
-	m := make(map[int]struct{})
+
 	for i := 0; i < numCourses; i++ {
-		soFar := make(map[int]struct{})
-		soFar[i] = struct{}{}
-		isCycle := cycleInCourse(list, i, m, soFar)
-		if isCycle {
-			return false
+		queue := []int{}
+		m := make(map[int]struct{})
+		for j := 0; j < len(list[i]); j++ {
+			adjList := list[i][j]
+			queue = append(queue, adjList)
+		}
+
+		for len(queue) > 0 {
+			item := queue[0]
+			queue = queue[1:]
+			m[item] = struct{}{}
+			if item == i {
+				return false
+			}
+			for k := 0; k < len(list[item]); k++ {
+				val := list[item][k]
+				if _, ok := m[val]; !ok {
+					queue = append(queue, list[item][k])
+				}
+			}
 		}
 	}
 
 	return true
-}
-
-func cycleInCourse(list [][]int, curr int, seen, soFar map[int]struct{}) bool {
-	if _, ok := soFar[curr]; ok && len(soFar) > 1 {
-		return true
-	} else {
-		soFar[curr] = struct{}{}
-	}
-	if _, ok := seen[curr]; ok {
-		return false
-	}
-	seen[curr] = struct{}{}
-	for _, k := range list[curr] {
-		isCycle := cycleInCourse(list, k, seen, soFar)
-		if isCycle {
-			return true
-		}
-	}
-	return false
 }
 
 func buildAdjacency(arr [][]int, n int) [][]int {
@@ -48,6 +44,9 @@ func buildAdjacency(arr [][]int, n int) [][]int {
 
 func RunLC207() {
 	// [[0,10],[3,18],[5,5],[6,11],[11,14],[13,1],[15,1],[17,4]]
-	a := [][]int{{0, 10}, {3, 18}, {5, 5}, {6, 11}, {11, 14}, {13, 1}, {15, 1}, {17, 4}}
-	canFinish(19, a)
+	// a := [][]int{{0, 10}, {3, 18}, {5, 5}, {6, 11}, {11, 14}, {13, 1}, {15, 1}, {17, 4}}
+	// a := [][]int{{1, 0}}
+	// a := [][]int{{1, 0}, {2, 1}, {2, 5}, {0, 3}, {4, 3}, {3, 5}, {4, 5}}
+	a := [][]int{{1, 0}, {2, 0}, {3, 1}, {3, 2}}
+	canFinish(6, a)
 }
