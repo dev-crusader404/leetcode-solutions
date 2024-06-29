@@ -2,6 +2,7 @@ package leetcode
 
 import (
 	"container/heap"
+	"fmt"
 	"math"
 )
 
@@ -60,7 +61,7 @@ func networkDelayTime(times [][]int, n int, k int) int {
 	heap.Init(queue)
 	heap.Push(queue, NewNode(k, 0))
 	for queue.Len() > 0 {
-		curr := queue.Pop().(*myNode)
+		curr := heap.Pop(queue).(*myNode)
 
 		if _, ok := seen[curr.Node]; ok {
 			continue
@@ -93,4 +94,9 @@ func initDistance(distance map[int]int, n, k int) {
 			distance[i] = math.MaxInt
 		}
 	}
+}
+
+func RunLC743() {
+	a := [][]int{{1, 2, 9}, {1, 4, 2}, {2, 5, 1}, {4, 2, 4}, {4, 5, 6}, {3, 2, 3}, {5, 3, 7}, {3, 1, 5}}
+	fmt.Println(networkDelayTime(a, 5, 1))
 }
