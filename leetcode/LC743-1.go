@@ -5,6 +5,8 @@ import (
 	"math"
 )
 
+var distance []int
+
 type pq []int
 
 func (a pq) Len() int {
@@ -16,7 +18,7 @@ func (a pq) Swap(i, j int) {
 }
 
 func (a pq) Less(i, j int) bool {
-	return a[i] < a[j]
+	return distance[a[i]] < distance[a[j]]
 }
 
 func (a *pq) Push(x any) {
@@ -35,7 +37,7 @@ func networkDelayTime2(times [][]int, n int, k int) int {
 		return 0
 	}
 	seen := make(map[int]struct{})
-	distance := make([]int, n)
+	distance = make([]int, n)
 	for i := range distance {
 		if i == k-1 {
 			distance[i] = 0
