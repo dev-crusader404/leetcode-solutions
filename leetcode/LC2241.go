@@ -17,18 +17,27 @@ func (this *ATM) Deposit(banknotesCount []int) {
 }
 
 func (this *ATM) Withdraw(amount int) []int {
+	invalid := []int{-1}
+	if amount < 20 {
+		return invalid
+	}
+	original := make([]int, 5)
+	copy(original, this.balance)
 	n := len(this.balance) - 1
-	result := make([]int, n+1)
-	for i := n; i >= 0; i++ {
+	result := make([]int, 5)
+	for i := n; i >= 0; i-- {
 		note := getAmount(i)
-		for amount > note && this.balance[i] > 0 {
+		for amount >= note && this.balance[i] > 0 {
 			amount -= note
+			result[i]++
+			this.balance[i]--
 			if amount == 0 {
 				return result
 			}
 		}
 	}
-	return nil
+	this.balance = original
+	return invalid
 }
 
 func getAmount(i int) int {
@@ -53,3 +62,7 @@ func getAmount(i int) int {
  * obj.Deposit(banknotesCount);
  * param_2 := obj.Withdraw(amount);
  */
+
+func RunLC2241() {
+
+}
