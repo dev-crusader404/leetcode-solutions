@@ -19,14 +19,21 @@ func sortedListToBST(head *ListNode) *TreeNode {
 	if head == nil {
 		return nil
 	}
-	return searchTree(head, nil)
-}
 
-func getMidPoint(start, end *ListNode) *ListNode {
-	fast, slow := start, start
-	for fast != end && fast.Next != nil {
-		fast = fast.Next.Next
-		slow = slow.Next
+	if head.Next == nil {
+		return &TreeNode{Val: head.Val}
 	}
-	return slow
+
+	prev, slow, fast := head, head.Next, head.Next.Next
+
+	for fast != nil && fast.Next != nil {
+		prev = slow
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+	prev.Next = nil
+	node := &TreeNode{Val: slow.Val}
+	node.Right = sortedListToBST(slow.Next)
+	node.Left = sortedListToBST(head)
+	return node
 }
