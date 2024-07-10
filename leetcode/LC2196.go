@@ -12,6 +12,38 @@ func createBinaryTree(descriptions [][]int) *TreeNode {
 	if len(descriptions) == 0 || len(descriptions[0]) < 3 {
 		return nil
 	}
+	var root int
+	m := make(map[int]*TreeNode)
+	childMap := make(map[int]struct{})
+
+	for _, v := range descriptions {
+		childMap[v[1]] = struct{}{}
+		if _, ok := m[v[0]]; !ok {
+			m[v[0]] = &TreeNode{Val: v[0]}
+		}
+		if _, ok := m[v[1]]; !ok {
+			m[v[1]] = &TreeNode{Val: v[1]}
+		}
+	}
+
+	for _, v := range descriptions {
+		if _, ok := childMap[v[0]]; !ok {
+			root = v[0]
+		}
+
+		if v[2] == 1 {
+			(m[v[0]]).Left = (m[v[1]])
+		} else {
+			(m[v[0]]).Right = (m[v[1]])
+		}
+	}
+	return m[root]
+}
+
+func createBinaryTree2(descriptions [][]int) *TreeNode {
+	if len(descriptions) == 0 || len(descriptions[0]) < 3 {
+		return nil
+	}
 	childParent := make(map[int]struct{})
 	m := make(map[int]*TreeNode)
 
