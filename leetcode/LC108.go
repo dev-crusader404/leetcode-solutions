@@ -8,35 +8,26 @@ package leetcode
  *     Right *TreeNode
  * }
  */
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
 func sortedArrayToBST(nums []int) *TreeNode {
-	var head *TreeNode
-	if len(nums) == 0 {
-		return head
-	}
-	head = &TreeNode{Val: nums[0]}
-	curr := head
-	for _, v := range nums {
-		bst(curr, v)
-	}
-	return head
+	return bst(0, len(nums)-1, nums)
 }
 
-func bst(node *TreeNode, val int) {
-	if val < node.Val {
-		if node.Left == nil {
-			node.Left = &TreeNode{Val: val}
-		} else {
-			bst(node.Left, val)
-		}
-	} else {
-		if node.Right == nil {
-			node.Right = &TreeNode{Val: val}
-		} else {
-			bst(node.Right, val)
-		}
+func bst(low, high int, nums []int) *TreeNode {
+	if low > high {
+		return nil
 	}
-}
-
-func RunLC108() {
-
+	mid := (low + high) / 2
+	var root TreeNode
+	root.Val = nums[mid]
+	root.Left = bst(low, mid-1, nums)
+	root.Right = bst(mid+1, high, nums)
+	return &root
 }
