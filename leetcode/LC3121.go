@@ -18,8 +18,8 @@ func numberOfSpecialChars(word string) int {
 			if index, ok := m[v+32]; ok {
 				if index < i {
 					count++
-					delete(m, v+32)
 				}
+				delete(m, v+32)
 			}
 		}
 	}
@@ -27,5 +27,5 @@ func numberOfSpecialChars(word string) int {
 }
 
 func RunLC3121() {
-	fmt.Println(numberOfSpecialChars("aaAbcBC"))
+	fmt.Println(numberOfSpecialChars("cCceDC"))
 }
