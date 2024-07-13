@@ -11,6 +11,9 @@ func maxScore(cardPoints []int, k int) int {
 	for _, v := range cardPoints {
 		totalSum += v
 	}
+	if len(cardPoints) == k {
+		return totalSum
+	}
 
 	for right, val := range cardPoints {
 		prefixSum += val
@@ -24,6 +27,6 @@ func maxScore(cardPoints []int, k int) int {
 }
 
 func RunLC1432() {
-	p := []int{1, 2, 3, 4, 5, 6, 1}
-	fmt.Println(maxScore(p, 3))
+	p := []int{9, 7, 7, 9, 7, 7, 9}
+	fmt.Println(maxScore(p, 7))
 }
