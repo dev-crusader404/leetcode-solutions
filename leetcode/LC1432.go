@@ -5,6 +5,25 @@ import (
 	"math"
 )
 
+// K-window solution
+func maxScore2(cardPoints []int, k int) int {
+	var totalSum int
+
+	for i := 0; i < k; i++ {
+		totalSum += cardPoints[i]
+	}
+	maxPoints := totalSum
+	left, right := k-1, len(cardPoints)-1
+
+	for i := 0; i < k; i++ {
+		totalSum = totalSum - cardPoints[left] + cardPoints[right]
+		maxPoints = max(maxPoints, totalSum)
+		left--
+		right--
+	}
+	return maxPoints
+}
+
 func maxScore(cardPoints []int, k int) int {
 	var totalSum, prefixSum, left int
 	maxPoints := math.MinInt
