@@ -16,7 +16,9 @@ func minDeletions(s string) int {
 				numDeletion++
 			} else {
 				isPresent = false
-				countMap[v] = struct{}{}
+				if v != 0 {
+					countMap[v] = struct{}{}
+				}
 			}
 		}
 	}
