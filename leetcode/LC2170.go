@@ -8,19 +8,27 @@ func minimumOperations(nums []int) int {
 	for i, v := range nums {
 		if i%2 == 0 {
 			odd[v]++
-			c, _ := odd[v]
-			if c > maxOdd {
-				secOdd = maxOdd
+			c := odd[v]
+			if c >= maxOdd {
+				if v != oddEle {
+					secOdd = maxOdd
+					oddEle = v
+				}
 				maxOdd = c
-				oddEle = v
+			} else if c >= secOdd {
+				secOdd = c
 			}
 		} else {
 			even[v]++
-			c, _ := even[v]
-			if c > maxEven {
-				secEven = maxEven
+			c := even[v]
+			if c >= maxEven {
+				if v != evenEle {
+					secEven = maxEven
+					evenEle = v
+				}
 				maxEven = c
-				evenEle = v
+			} else if c >= secEven {
+				secEven = c
 			}
 		}
 	}
@@ -32,6 +40,7 @@ func minimumOperations(nums []int) int {
 }
 
 func RunLC2170() {
-	n := []int{2, 2, 2, 2}
+	// n := []int{1, 2, 2, 2, 2}
+	n := []int{3, 1, 3, 2, 4, 3}
 	fmt.Println(minimumOperations(n))
 }
