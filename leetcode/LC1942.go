@@ -18,7 +18,7 @@ func NewSeatAvailability(s, t int) *SeatAvailability {
 type PriQ []*SeatAvailability
 
 func (p PriQ) Len() int           { return len(p) }
-func (p PriQ) Less(i, j int) bool { return p[i].Seat < p[j].Seat }
+func (p PriQ) Less(i, j int) bool { return p[i].AvailableTime < p[j].AvailableTime }
 func (p PriQ) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 
 func (p *PriQ) Push(x any) {
@@ -33,8 +33,7 @@ func (p *PriQ) Pop() any {
 }
 
 func (p *PriQ) Peek() any {
-	n := len(*p) - 1
-	return (*p)[n]
+	return (*p)[0]
 }
 
 type IntHeaps []int
@@ -70,7 +69,7 @@ func smallestChair(times [][]int, targetFriend int) int {
 	heap.Init(k)
 	for _, v := range times {
 		for k.Len() > 0 && k.Peek().(*SeatAvailability).AvailableTime <= v[0] {
-			heap.Push(seat, k.Pop().(*SeatAvailability).Seat)
+			heap.Push(seat, heap.Pop(k).(*SeatAvailability).Seat)
 		}
 		if v[0] == start && v[1] == end {
 			break
@@ -84,5 +83,5 @@ func smallestChair(times [][]int, targetFriend int) int {
 func RunLC1942() {
 	// t := [][]int{{1, 4}, {2, 3}, {4, 6}}
 	t := [][]int{{33889, 98676}, {80071, 89737}, {44118, 52565}, {52992, 84310}, {78492, 88209}, {21695, 67063}, {84622, 95452}, {98048, 98856}, {98411, 99433}, {55333, 56548}, {65375, 88566}, {55011, 62821}, {48548, 48656}, {87396, 94825}, {55273, 81868}, {75629, 91467}}
-	fmt.Println(smallestChair(t, 1))
+	fmt.Println(smallestChair(t, 6))
 }
