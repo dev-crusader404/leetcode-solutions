@@ -20,18 +20,13 @@ func minimumDeletions(nums []int) int {
 			minIdx = i
 		}
 	}
-	id1, isRight := crossHalf(minIdx, len(nums))
-	id2, isRight2 := crossHalf(maxIdx, len(nums))
-
-	if isRight == isRight2 {
-		return max(id1, id2)
+	fromLeft := max(minIdx, maxIdx) + 1
+	fromRight := len(nums) - min(minIdx, maxIdx)
+	var removal int
+	if minIdx > maxIdx {
+		removal = (maxIdx + 1) + len(nums) - minIdx
+	} else {
+		removal = (minIdx + 1) + len(nums) - maxIdx
 	}
-	return id1 + id2
-}
-
-func crossHalf(i, n int) (int, bool) {
-	if i >= n/2 {
-		return (n - i), true
-	}
-	return i + 1, false
+	return min(fromLeft, min(fromRight, removal))
 }
