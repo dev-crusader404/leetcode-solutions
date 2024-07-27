@@ -13,6 +13,9 @@ func numDifferentIntegers(word string) int {
 			}
 			numStart++
 		}
+		for i < numStart && word[i] == '0' {
+			i++
+		}
 		seen[word[i:numStart]] = struct{}{}
 		i = numStart
 	}
