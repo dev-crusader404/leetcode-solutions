@@ -9,6 +9,23 @@ func reverseWords(s string) string {
 	if len(s) == 0 {
 		return s
 	}
+	var sb strings.Builder
+	s = strings.TrimSpace(s)
+	arr := strings.Fields(s)
+
+	for i := len(arr) - 1; i >= 0; i-- {
+		sb.WriteString(arr[i])
+		if i > 0 {
+			sb.WriteString(" ")
+		}
+	}
+	return sb.String()
+}
+
+func reverseWords2(s string) string {
+	if len(s) == 0 {
+		return s
+	}
 	s = strings.TrimSpace(s)
 	var sb strings.Builder
 	for i, v := range s {
@@ -26,6 +43,6 @@ func reverseWords(s string) string {
 }
 
 func RunLC151() {
-	s := "example   good a"
+	s := "example   good   a"
 	fmt.Println(reverseWords(s))
 }
