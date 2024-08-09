@@ -27,6 +27,6 @@ func constrainedSubsetSum(nums []int, k int) int {
 }
 
 func RunLC1425() {
-	x := []int{-1, -2, -3}
+	x := []int{10, 2, -10, 5, 20, -6, -9, 4, -3, 10}
 	fmt.Println(constrainedSubsetSum(x, 2))
 }
