@@ -16,6 +16,16 @@ func selfDividingNumbers(left int, right int) []int {
 }
 
 func selfDivide(x int) bool {
+	for i := x; i > 0; i /= 10 {
+		num := i % 10
+		if i == 0 || x%num != 0 {
+			return false
+		}
+	}
+	return true
+}
+
+func selfDivide2(x int) bool {
 	s := strconv.Itoa(x)
 	for _, v := range s {
 		num := int(v - '0')
