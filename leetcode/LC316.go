@@ -1,5 +1,7 @@
 package leetcode
 
+import "fmt"
+
 func removeDuplicateLetters(s string) string {
 	lastIndex := make([]int, 26)
 	seen := make([]bool, 26)
@@ -10,15 +12,19 @@ func removeDuplicateLetters(s string) string {
 	stk := make([]rune, 0)
 
 	for i, c := range s {
-		for len(stk) > 0 && c < stk[len(stk)-1] && lastIndex[c-'a'] != i {
-			seen[stk[len(stk)-1]-'a'] = false
-			stk = stk[:len(stk)-1]
-		}
 		if seen[c-'a'] {
 			continue
+		}
+		for len(stk) > 0 && c < stk[len(stk)-1] && lastIndex[stk[len(stk)-1]-'a'] > i {
+			seen[stk[len(stk)-1]-'a'] = false
+			stk = stk[:len(stk)-1]
 		}
 		seen[c-'a'] = true
 		stk = append(stk, c)
 	}
 	return string(stk)
+}
+
+func RunLC316() {
+	fmt.Println(removeDuplicateLetters("abacb"))
 }
