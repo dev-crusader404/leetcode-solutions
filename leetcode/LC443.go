@@ -3,8 +3,8 @@ package leetcode
 import "fmt"
 
 func compress(chars []byte) int {
-	idx := 0
-	for right := range chars {
+	idx, right := 0, 0
+	for right < len(chars) {
 		left := right
 		for right < len(chars) && chars[left] == chars[right] {
 			right++
@@ -20,6 +20,9 @@ func compress(chars []byte) int {
 			idx++
 		}
 	}
-	fmt.Println(chars)
 	return idx
+}
+
+func RunLC443() {
+	fmt.Println(compress([]byte{'a', 'a', 'b', 'b', 'c', 'c', 'c'}))
 }
