@@ -19,3 +19,29 @@ func productExceptSelf(nums []int) []int {
 	}
 	return nums
 }
+
+// Solution using Closure
+func productExceptSelf2(nums []int) []int {
+	n := len(nums)
+	result := make([]int, n)
+
+	prefixProduct := func() {
+		product := 1
+		for i := 0; i < n; i++ {
+			result[i] = product
+			product *= nums[i]
+		}
+	}
+
+	suffixProduct := func() {
+		product := 1
+		for i := n - 1; i >= 0; i-- {
+			result[i] *= product
+			product *= nums[i]
+		}
+	}
+
+	prefixProduct()
+	suffixProduct()
+	return result
+}
