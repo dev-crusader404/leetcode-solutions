@@ -1,5 +1,7 @@
 package leetcode
 
+import "fmt"
+
 func lemonadeChange(bills []int) bool {
 	cash := [3]int{0, 0, 0}
 	if bills[0] != 5 {
@@ -10,15 +12,16 @@ func lemonadeChange(bills []int) bool {
 		cash[bill]++
 		bill--
 		v -= 5
-		for v != 0 && cash[bill] > 0 {
-			amt := v / getAmount(bill)
+		for bill >= 0 && v != 0 {
+			amt := v / getBalance(bill)
 			if amt >= cash[bill] {
 				amt = cash[bill]
 				cash[bill] = 0
 			} else {
 				cash[bill] -= amt
 			}
-			v -= amt * getAmount(bill)
+			v -= amt * getBalance(bill)
+			bill--
 		}
 		if v != 0 {
 			return false
@@ -44,4 +47,9 @@ func getBalance(x int) int {
 		return 20
 	}
 	return 5*x + 5
+}
+
+func RunLC860() {
+	n := []int{5, 5, 10, 20, 5, 5, 5, 5, 5, 5, 5, 5, 5, 10, 5, 5, 20, 5, 20, 5}
+	fmt.Println(lemonadeChange(n))
 }
