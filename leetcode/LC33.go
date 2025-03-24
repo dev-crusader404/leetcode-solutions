@@ -75,5 +75,36 @@ func search(nums []int, target int) int {
 func RunRotatedSearch() {
 	// l := []int{7, 8, 0, 1, 2, 3, 4, 5, 6}
 	l := []int{4, 5, 6, 7, 8, 1, 2, 3}
-	fmt.Println(search(l, 8))
+	fmt.Println(search2(l, 8))
+}
+
+func search2(nums []int, target int) int {
+	if len(nums) == 0 {
+		return -1
+	}
+	if len(nums) == 1 && target != nums[0] {
+		return -1
+	}
+	left, right := 0, len(nums)-1
+	for left <= right {
+		mid := (left + right) / 2
+		if target == nums[mid] {
+			return mid
+		}
+
+		if nums[left] <= nums[mid] {
+			if nums[mid] < target || nums[left] > target {
+				left = mid + 1
+			} else {
+				right = mid - 1
+			}
+		} else {
+			if nums[mid] > target || nums[right] < target {
+				right = mid - 1
+			} else {
+				left = mid + 1
+			}
+		}
+	}
+	return -1
 }
