@@ -35,3 +35,34 @@ func RunLC230() {
 	tree := BuildTree(arr)
 	fmt.Println(kthSmallest(tree, 3))
 }
+
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func kthSmallest2(root *TreeNode, k int) int {
+	if root == nil {
+		return 0
+	}
+	var min int
+	return findKSmallest(root, &k, min)
+}
+
+func findKSmallest(node *TreeNode, k *int, min int) int {
+	if node.Left != nil {
+		min = findKSmallest(node.Left, k, min)
+	}
+	(*k)--
+	if (*k) == 0 {
+		min = node.Val
+		return min
+	}
+	if node.Right != nil {
+		min = findKSmallest(node.Right, k, min)
+	}
+	return min
+}
