@@ -1,3 +1,3 @@
-module github.com/dev-crusader404/leetcode-solutions
+module github.com/dev-crusader/leetcode-solutions
 
 go 1.21.8
